@@ -56,12 +56,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Asset Scripts\Character.cs" />
+     <Compile Include="Assets\Scripts\Asset Scripts\Items\HealingItem.cs" />
      <Compile Include="Assets\Scripts\Asset Scripts\Items\ItemAsset.cs" />
+     <Compile Include="Assets\Scripts\Asset Scripts\Items\Null_Item.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\Behaviour Scripts\BaseBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\Behaviour Scripts\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\Behaviour Scripts\NPCBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\Behaviour Scripts\PlayerBehaviour.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\CameraControl.cs" />
+     <Compile Include="Assets\Scripts\Character Scripts\Player\InventoryScript.cs" />
      <Compile Include="Assets\Scripts\Character Scripts\PlayerControl.cs" />
      <Compile Include="Assets\Scripts\Input.cs" />
  <Reference Include="UnityEngine">

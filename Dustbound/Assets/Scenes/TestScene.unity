@@ -3899,7 +3899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32094c288379048489a6b0b8e128a921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1765971389}
+  body: {fileID: 1765971392}
 --- !u!1 &1067392098
 GameObject:
   m_ObjectHideFlags: 0
@@ -4361,12 +4361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab18cbaed54af5d42a2b5d1213862ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  charName: TestEnemy
-  charDesc: A warrior set on destroying humanity
-  baseHealth: 100
-  baseDmg: 5
-  baseArmour: 0
 --- !u!136 &1080046676
 CapsuleCollider:
   m_ObjectHideFlags: 0
