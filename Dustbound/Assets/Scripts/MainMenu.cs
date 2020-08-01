@@ -2,21 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Mirror;
 
 public class MainMenu : MonoBehaviour
 {
 
-    string playerName;
-    [SerializeField] public TMPro.TMP_InputField inputField;
+    [SerializeField] private DustboundLobby networkManager = null;
 
-    public void UpdateName()
-    {
-        playerName = inputField.text;
-        Debug.Log(playerName);
-    }
+    [Header("UI")]
+    [SerializeField] private GameObject landingPagePanel = null;
 
-    public void OnPlayPressed()
+    public void HostLobby()
     {
-        SceneManager.LoadScene("TestScene");
+        networkManager.StartHost();
+        landingPagePanel.SetActive(false);
     }
 }
