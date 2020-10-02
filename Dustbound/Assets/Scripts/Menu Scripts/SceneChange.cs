@@ -15,6 +15,7 @@ public class SceneChange : MonoBehaviour
     }
 
     public void MainMenu(){
+        Time.timeScale = 1.0f;
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
