@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 using System.Threading;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -35,6 +36,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
         control = new Input();
 
         //ctx = context, can be named anything; lambda expression
@@ -43,22 +45,25 @@ public class PlayerControl : MonoBehaviour
 
         control.Gameplay.Jump.performed += ctx => Jump();
         control.Gameplay.DodgeRoll.performed += ctx => DodgeRoll();
+        control.Gameplay.BasicAttack.performed += ctx => BasicAttack();
     }
 
     void Update()
     {
-        direction = new Vector3(movement.x, 0.0f, movement.y);
-        direction = cam.transform.TransformDirection(direction);
+        //direction = new Vector3(movement.x, 0.0f, movement.y);
+        direction = (movement.x * cam.transform.right) + (movement.y * cam.transform.forward);
+        //direction = cam.transform.TransformDirection(direction);
         direction.y = 0.0f;
+        direction.Normalize();
 
         if (direction != Vector3.zero)
         {
             //immediate rotation
-            transform.rotation = Quaternion.LookRotation(direction);
+            //transform.rotation = Quaternion.LookRotation(direction);
 
             //slow rotation
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
-            //0.01f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
+            0.01f);
         }
 
     }
@@ -112,6 +117,15 @@ public class PlayerControl : MonoBehaviour
         {
             isDashing = true;
         }
+    }
+
+    void BasicAttack()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
     }
 
 

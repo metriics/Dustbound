@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
+
+public enum CharacterStates { IDLE, ATTACKING, WALKING, HIT}
 
 public class Character : MonoBehaviour
 {
@@ -16,5 +19,4 @@ public class Character : MonoBehaviour
         //Overide this method for specific characters
     }
 
-    public enum CharacterStates { idle, attacking, walking }
 }
