@@ -49,6 +49,14 @@ public class @Input : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""edddd641-0bf9-4170-9381-894268779854"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -153,23 +161,23 @@ public class @Input : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""961eb2b2-baef-43b3-93fc-2c2d86621745"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Camera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f708357a-f8de-4791-841c-6f0e7a87a5fa"",
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Dodge Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40ff9771-9196-4bcf-9b58-970546986a47"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""PauseMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -195,6 +203,7 @@ public class @Input : IInputActionCollection, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_DodgeRoll = m_Gameplay.FindAction("Dodge Roll", throwIfNotFound: true);
+        m_Gameplay_PauseMenu = m_Gameplay.FindAction("PauseMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -248,6 +257,7 @@ public class @Input : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_DodgeRoll;
+    private readonly InputAction m_Gameplay_PauseMenu;
     public struct GameplayActions
     {
         private @Input m_Wrapper;
@@ -256,6 +266,7 @@ public class @Input : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @Camera => m_Wrapper.m_Gameplay_Camera;
         public InputAction @DodgeRoll => m_Wrapper.m_Gameplay_DodgeRoll;
+        public InputAction @PauseMenu => m_Wrapper.m_Gameplay_PauseMenu;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -277,6 +288,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @DodgeRoll.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
                 @DodgeRoll.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
                 @DodgeRoll.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDodgeRoll;
+                @PauseMenu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseMenu;
+                @PauseMenu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPauseMenu;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -293,6 +307,9 @@ public class @Input : IInputActionCollection, IDisposable
                 @DodgeRoll.started += instance.OnDodgeRoll;
                 @DodgeRoll.performed += instance.OnDodgeRoll;
                 @DodgeRoll.canceled += instance.OnDodgeRoll;
+                @PauseMenu.started += instance.OnPauseMenu;
+                @PauseMenu.performed += instance.OnPauseMenu;
+                @PauseMenu.canceled += instance.OnPauseMenu;
             }
         }
     }
@@ -321,5 +338,6 @@ public class @Input : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnDodgeRoll(InputAction.CallbackContext context);
+        void OnPauseMenu(InputAction.CallbackContext context);
     }
 }
