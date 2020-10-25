@@ -56,6 +56,9 @@ public class BaseBehaviour : MonoBehaviour
         var weaponHitbox = this.transform.Find("Weapon Hitbox");
         if (weaponHitbox.gameObject.activeSelf == false)
         {
+            Vector3 dir = player.transform.position - this.transform.position;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            transform.rotation = rot;
             weaponHitbox.gameObject.SetActive(true);
             attackTime = 0.0f;
         }

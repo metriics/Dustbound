@@ -148,6 +148,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a4d2c38a-b810-475e-a43a-6040b07f2a88",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f708357a-f8de-4791-841c-6f0e7a87a5fa",
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
