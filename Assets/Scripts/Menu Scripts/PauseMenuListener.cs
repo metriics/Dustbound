@@ -36,12 +36,14 @@ public class PauseMenuListener : MonoBehaviour
         Debug.Log("Test");
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
+        Cursor.lockState = CursorLockMode.Locked;
         isPaused = false;
     }
     void Pause()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0.0f;
+        Cursor.lockState = CursorLockMode.None;
         isPaused = true;
     }
 

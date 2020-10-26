@@ -29,6 +29,9 @@ public class CameraControl : MonoBehaviour
         control.Gameplay.Camera.canceled += ctx => cam = Vector2.zero;
 
         transform.LookAt(player.transform.position);
+
+        // maybe move this later
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void FixedUpdate()
