@@ -112,7 +112,7 @@ public class PlayerControl : MonoBehaviour
 
     void GroundCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f)){
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.7f)){
             isGrounded = true;
         } else
         {
