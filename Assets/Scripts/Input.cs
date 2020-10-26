@@ -36,7 +36,7 @@ public class @Input : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Camera"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""3012c862-3700-4158-8556-1d4f9652124c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

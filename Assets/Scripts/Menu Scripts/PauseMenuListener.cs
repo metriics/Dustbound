@@ -12,6 +12,7 @@ public class PauseMenuListener : MonoBehaviour
     private void Awake()
     {
         controls = new Input();
+        Cursor.lockState = CursorLockMode.Locked;
 
         //if (isPaused == false){
         //    controls.Gameplay.PauseMenu.performed += ctx => Pause();
@@ -33,7 +34,6 @@ public class PauseMenuListener : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Test");
         pauseMenu.SetActive(false);
         Time.timeScale = 1.0f;
         Cursor.lockState = CursorLockMode.Locked;
