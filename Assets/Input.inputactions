@@ -170,11 +170,33 @@
                 },
                 {
                     "name": "",
+                    "id": "d9082163-424d-4633-b0d5-13cbb9d8a7be",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Dodge Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "40ff9771-9196-4bcf-9b58-970546986a47",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
+                    "action": "PauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63e47c02-272a-432c-98ae-cc596c97eeba",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
                     "action": "PauseMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
