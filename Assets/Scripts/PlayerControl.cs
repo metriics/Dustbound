@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
+        //Cursor.lockState = CursorLockMode.Locked;
         control = new Input();
 
         //ctx = context, can be named anything; lambda expression
