@@ -7,6 +7,12 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+enum PlayerState
+{
+    IDLE,
+    MOVING,
+    ATTACKING
+}
 
 public class PlayerControl : MonoBehaviour
 {
@@ -28,10 +34,16 @@ public class PlayerControl : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     private Rigidbody body;
-
-    private bool isJumping;
+    private bool isJumping = false;
     private float jumpForce = 7.0f;
     RaycastHit hit;
+
+    //attack
+    [SerializeField]
+    private WeaponTrigger hitbox;
+    private float attackTime = 0.0f;
+    private bool isAttacking = false;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -63,7 +75,18 @@ public class PlayerControl : MonoBehaviour
 
             //slow rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
-            0.01f);
+            0.1f);
+        }
+
+        if (isAttacking)
+        {
+            attackTime += Time.deltaTime;
+            if (attackTime >= 1.0f)
+            {
+                hitbox.gameObject.SetActive(false);
+                attackTime = 0.0f;
+                isAttacking = false;
+            }
         }
 
     }
@@ -85,7 +108,6 @@ public class PlayerControl : MonoBehaviour
             rollTimer = Time.fixedTime + rollCooldown;
             isDashing = false;
         }
-   
     }
 
     void GroundCheck()
@@ -121,7 +143,12 @@ public class PlayerControl : MonoBehaviour
 
     void BasicAttack()
     {
-        
+        if (hitbox.gameObject.activeSelf == false && isAttacking == false)
+        {
+            isAttacking = true;
+            Quaternion rot = Quaternion.LookRotation(transform.position);
+            hitbox.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
