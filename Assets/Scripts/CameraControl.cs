@@ -24,11 +24,14 @@ public class CameraControl : MonoBehaviour
     void Awake()
     {
         control = new Input();
-
+        
         control.Gameplay.Camera.performed += ctx => cam = ctx.ReadValue<Vector2>();
         control.Gameplay.Camera.canceled += ctx => cam = Vector2.zero;
-
+        
         transform.LookAt(player.transform.position);
+
+        // maybe move this later
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void FixedUpdate()

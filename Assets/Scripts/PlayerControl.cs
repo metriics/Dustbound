@@ -38,6 +38,10 @@ public class PlayerControl : MonoBehaviour
     private float jumpForce = 7.0f;
     RaycastHit hit;
 
+    //cam test stuff
+    private Vector2 camVec;
+    
+
     //attack
     [SerializeField]
     private WeaponTrigger hitbox;
@@ -48,7 +52,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         control = new Input();
 
         //ctx = context, can be named anything; lambda expression
@@ -57,21 +61,31 @@ public class PlayerControl : MonoBehaviour
 
         control.Gameplay.Jump.performed += ctx => Jump();
         control.Gameplay.DodgeRoll.performed += ctx => DodgeRoll();
+
+        // cam test stuff
+        control.Gameplay.Camera.performed += ctx => camVec = ctx.ReadValue<Vector2>();
+        control.Gameplay.Camera.canceled += ctx => camVec = Vector2.zero;
         control.Gameplay.BasicAttack.performed += ctx => BasicAttack();
     }
 
     void Update()
     {
-        //direction = new Vector3(movement.x, 0.0f, movement.y);
-        direction = (movement.x * cam.transform.right) + (movement.y * cam.transform.forward);
+        var mouse = Mouse.current;
+
+        direction = new Vector3(movement.x, 0.0f, movement.y);
         //direction = cam.transform.TransformDirection(direction);
         direction.y = 0.0f;
         direction.Normalize();
 
-        if (direction != Vector3.zero)
+
+        Vector2 mouseD = mouse.delta.ReadValue();
+
+        Vector3 camDir = new Vector3(mouseD.x, 0.0f, mouseD.y);
+
+        if (camDir != Vector3.zero)
         {
             //immediate rotation
-            //transform.rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.LookRotation(camDir);
 
             //slow rotation
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
@@ -101,7 +115,7 @@ public class PlayerControl : MonoBehaviour
             body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = false;
         }
-        
+
         if (isDashing)
         {
             body.AddForce(transform.forward * 8.0f, ForceMode.Impulse);
