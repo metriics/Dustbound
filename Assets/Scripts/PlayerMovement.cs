@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            movement.y += gravity * moveSpeed * Time.deltaTime;
+            movement.y += gravity * Time.deltaTime;
         }
 
         return movement;
