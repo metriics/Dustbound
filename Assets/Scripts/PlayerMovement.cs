@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
+    private Vector3 playerVelocity;
     private Input playerInput;
     private Vector2 mouseVec;
     private float xRotation = 0.0f;
@@ -16,14 +17,15 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool isGrounded = false;
 
-    private float gravity = -9.8f;
+    public float gravity = -9.8f;
 
     public float sensitivity = 10.0f;
     public GameObject followTarget; // we will use this for slight Y axis camera rotation
     public float moveSpeed = 10.0f;
+    public float jumpHeight = 1.0f;
 
     public Transform groundCheckLocation;
-    public float groundDist = 0.01f;
+    public float groundDist = 1f;
     public LayerMask groundMask;
 
     private void Awake()
@@ -63,13 +65,9 @@ public class PlayerMovement : MonoBehaviour
 
         movement = direction * moveSpeed * Time.deltaTime;
 
-        if (isGrounded)
+        if (isGrounded && movement.y < 0.0f)
         {
             movement.y = 0.0f;
-        }
-        else
-        {
-            movement.y += gravity * Time.deltaTime;
         }
 
         return movement;
@@ -78,13 +76,15 @@ public class PlayerMovement : MonoBehaviour
     private void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(groundCheckLocation.position, groundDist, groundMask);
+        Debug.Log(isGrounded);
     }
 
     private void Jump()
     {
-        if (!isJumping)
+        if (!isJumping && isGrounded)
         {
             isJumping = true;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             Debug.Log("Jump");
         }
     }
@@ -104,19 +104,22 @@ public class PlayerMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0.0f, xRotation, 0.0f);
         followTarget.transform.localRotation = Quaternion.Euler(yRotation, 0.0f, 0.0f);
 
+        Vector3 curMoveVector = GetMoveVector();
+        controller.Move(curMoveVector);
 
         GroundCheck();
-
-        Vector3 curMoveVector = GetMoveVector();
-
-        if (isJumping)
+        if (isJumping && isGrounded)
         {
-            curMoveVector.y = 10.0f;
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             isJumping = false;
         }
 
-        controller.Move(curMoveVector);
-        
+        playerVelocity.y += gravity * Time.deltaTime;
+        if(playerVelocity.y < 0.0f && isGrounded)
+        {
+            playerVelocity.y = 0.0f;
+        }
+        controller.Move(playerVelocity * Time.deltaTime);
 
         prevVec = curMoveVector;
     }
