@@ -15,4 +15,9 @@ public class Enemy : Character
     {
         
     }
+
+    public void OnHit(Attack _attack)
+    {
+  
+    }
 }

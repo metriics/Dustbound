@@ -6,9 +6,13 @@ public class WeaponTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.tag == "Player")
         {
-            Debug.Log("Hit");
+            Debug.Log("Player was hit");
+        }
+        if (other.tag == "Enemy")
+        {
+            Debug.Log("Enemy was hit");
         }
     }
 }

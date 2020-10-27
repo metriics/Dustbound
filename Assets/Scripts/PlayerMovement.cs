@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
     public float groundDist = 1f;
     public LayerMask groundMask;
 
+    //attack
+    [SerializeField]
+    private WeaponTrigger hitbox;
+    private float attackTime = 0.0f;
+    private bool isAttacking = false;
+
+
     private void Awake()
     {
         playerInput = new Input();
@@ -39,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Gameplay.Camera.canceled += ctx => mouseVec = Vector2.zero;
 
         playerInput.Gameplay.Jump.performed += ctx => Jump();
+        playerInput.Gameplay.BasicAttack.performed += ctx => BasicAttack();
     }
 
     private void OnEnable()
@@ -89,6 +97,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void BasicAttack()
+    {
+        if (hitbox.gameObject.activeSelf == false && isAttacking == false)
+        {
+            isAttacking = true;
+            Quaternion rot = Quaternion.LookRotation(transform.position);
+            hitbox.gameObject.SetActive(true);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -122,5 +140,16 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
 
         prevVec = curMoveVector;
+
+        if (isAttacking)
+        {
+            attackTime += Time.deltaTime;
+            if (attackTime >= 1.0f)
+            {
+                hitbox.gameObject.SetActive(false);
+                attackTime = 0.0f;
+                isAttacking = false;
+            }
+        }
     }
 }
