@@ -84,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
     private void GroundCheck()
     {
         isGrounded = Physics.CheckSphere(groundCheckLocation.position, groundDist, groundMask);
-        Debug.Log(isGrounded);
     }
 
     private void Jump()
@@ -114,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
         float mouseY = mouseVec.y * sensitivity * Time.deltaTime;
 
         xRotation += mouseX;
-        yRotation += mouseY;
+        yRotation -= mouseY;
 
         // clamp y rotation here so you cant look upside down with a broken neck
         yRotation = Mathf.Clamp(yRotation, 0.0f, 25.0f);
