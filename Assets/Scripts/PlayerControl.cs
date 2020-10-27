@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.MemoryMappedFiles;
 using System.Threading;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+enum PlayerState
+{
+    IDLE,
+    MOVING,
+    ATTACKING
+}
 
 public class PlayerControl : MonoBehaviour
 {
@@ -27,14 +34,25 @@ public class PlayerControl : MonoBehaviour
     private bool isGrounded;
     [SerializeField]
     private Rigidbody body;
-
-    private bool isJumping;
+    private bool isJumping = false;
     private float jumpForce = 7.0f;
     RaycastHit hit;
+
+    //cam test stuff
+    private Vector2 camVec;
+    
+
+    //attack
+    [SerializeField]
+    private WeaponTrigger hitbox;
+    private float attackTime = 0.0f;
+    private bool isAttacking = false;
+
 
     // Start is called before the first frame update
     void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         control = new Input();
 
         //ctx = context, can be named anything; lambda expression
@@ -43,22 +61,46 @@ public class PlayerControl : MonoBehaviour
 
         control.Gameplay.Jump.performed += ctx => Jump();
         control.Gameplay.DodgeRoll.performed += ctx => DodgeRoll();
+
+        // cam test stuff
+        control.Gameplay.Camera.performed += ctx => camVec = ctx.ReadValue<Vector2>();
+        control.Gameplay.Camera.canceled += ctx => camVec = Vector2.zero;
+        control.Gameplay.BasicAttack.performed += ctx => BasicAttack();
     }
 
     void Update()
     {
-        direction = new Vector3(movement.x, 0.0f, movement.y);
-        direction = cam.transform.TransformDirection(direction);
-        direction.y = 0.0f;
+        var mouse = Mouse.current;
 
-        if (direction != Vector3.zero)
+        direction = new Vector3(movement.x, 0.0f, movement.y);
+        //direction = cam.transform.TransformDirection(direction);
+        direction.y = 0.0f;
+        direction.Normalize();
+
+
+        Vector2 mouseD = mouse.delta.ReadValue();
+
+        Vector3 camDir = new Vector3(mouseD.x, 0.0f, mouseD.y);
+
+        if (camDir != Vector3.zero)
         {
             //immediate rotation
-            transform.rotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.LookRotation(camDir);
 
             //slow rotation
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
-            //0.01f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction),
+            0.1f);
+        }
+
+        if (isAttacking)
+        {
+            attackTime += Time.deltaTime;
+            if (attackTime >= 1.0f)
+            {
+                hitbox.gameObject.SetActive(false);
+                attackTime = 0.0f;
+                isAttacking = false;
+            }
         }
 
     }
@@ -73,19 +115,18 @@ public class PlayerControl : MonoBehaviour
             body.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isJumping = false;
         }
-        
+
         if (isDashing)
         {
             body.AddForce(transform.forward * 8.0f, ForceMode.Impulse);
             rollTimer = Time.fixedTime + rollCooldown;
             isDashing = false;
         }
-   
     }
 
     void GroundCheck()
     {
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f)){
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.7f)){
             isGrounded = true;
         } else
         {
@@ -112,6 +153,20 @@ public class PlayerControl : MonoBehaviour
         {
             isDashing = true;
         }
+    }
+
+    void BasicAttack()
+    {
+        if (hitbox.gameObject.activeSelf == false && isAttacking == false)
+        {
+            isAttacking = true;
+            Quaternion rot = Quaternion.LookRotation(transform.position);
+            hitbox.gameObject.SetActive(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
     }
 
 
