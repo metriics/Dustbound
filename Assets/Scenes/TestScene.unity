@@ -6887,8 +6887,8 @@ MonoBehaviour:
   gravity: -19.6
   sensitivity: 10
   followTarget: {fileID: 237016222}
-  moveSpeed: 10
-  jumpHeight: 1
+  moveSpeed: 13
+  jumpHeight: 0.66
   groundCheckLocation: {fileID: 1688073761}
   groundDist: 1
   groundMask:
