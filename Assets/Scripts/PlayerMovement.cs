@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheckLocation;
     public float groundDist = 1f;
     public LayerMask groundMask;
+    public CinemachineVirtualCamera vcam;
 
     //attack
     [SerializeField]
@@ -150,5 +152,9 @@ public class PlayerMovement : MonoBehaviour
                 isAttacking = false;
             }
         }
+
+        // force camera update; this seems to fix the flickering position of the vcam
+        // when the camera is angled all the way down
+        vcam.InternalUpdateCameraState(followTarget.transform.up, Time.deltaTime);
     }
 }
