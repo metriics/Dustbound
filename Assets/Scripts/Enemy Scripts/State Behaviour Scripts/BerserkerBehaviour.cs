@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BaseBehaviour : MonoBehaviour
+public class BerserkerBehaviour : MonoBehaviour
 {
     public CharacterState state;
     public GameObject player;

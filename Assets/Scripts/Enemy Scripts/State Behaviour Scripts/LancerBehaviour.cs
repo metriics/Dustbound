@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LancerBehaviour : BaseBehaviour
+public class LancerBehaviour : BerserkerBehaviour
 {
     public float blockRadius = 10.0f;
     public float blockTimer = 0.0f;
