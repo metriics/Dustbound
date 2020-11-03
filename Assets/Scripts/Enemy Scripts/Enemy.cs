@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+//TODO make enemy class
+public abstract class Enemy : MonoBehaviour
 {
+    private string name { get; set; }
+    private float damage { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,4 +24,19 @@ public class Enemy : MonoBehaviour
     {
   
     }
+}
+
+public class Berserker : Enemy
+{
+
+}
+
+public class Lancer : Enemy
+{
+
+}
+
+public class Marksman : Enemy
+{
+
 }
