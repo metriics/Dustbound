@@ -8,12 +8,12 @@ public class BerserkerBehaviour : MonoBehaviour
     public CharacterState state;
     public GameObject player;
     public CharacterObj character;
-    public float speed = 0.3f;
-    float reach = 2.0f;
+    public float speed = 1f;
+    public float reach = 2.0f;
     NavMeshAgent navMeshAgent;
-    public enum CharacterState { idle, attacking, moving }
+    public enum CharacterState { idle, attacking, blocking, moving }
 
-    float attackTime = 0.0f;
+    public float attackTime = 0.0f;
 
     // Start is called before the first frame update
     void Awake()
@@ -33,6 +33,10 @@ public class BerserkerBehaviour : MonoBehaviour
         {
             attacking();
         }
+        else if(state == CharacterState.blocking)
+        {
+            blocking(player.transform.position);
+        }
         else if(state == CharacterState.moving)
         {
             moving(player.transform.position);
@@ -43,7 +47,7 @@ public class BerserkerBehaviour : MonoBehaviour
     {
         //Behaviour for idle position
         //Debug.Log(character.charName + " is idle");
-        if (Vector3.Distance(this.transform.position, player.transform.position) < 15.0f)
+        if (Vector3.Distance(this.transform.position, player.transform.position) < 20.0f)
         {
             state = CharacterState.moving;
         }
@@ -73,6 +77,11 @@ public class BerserkerBehaviour : MonoBehaviour
         }
     }
 
+    virtual public void blocking(Vector3 pos)
+    {
+
+    }
+
     virtual public void moving(Vector3 pos)
     {
         //Behaviour for moving position
@@ -81,12 +90,13 @@ public class BerserkerBehaviour : MonoBehaviour
         {
             state = CharacterState.attacking;
         }
-        else if(Vector3.Distance(this.transform.position, player.transform.position) > 15.0f)
+        else if(Vector3.Distance(this.transform.position, player.transform.position) > 20.0f)
         {
             state = CharacterState.idle;
         }
         else
         {
+            navMeshAgent.speed = speed;
             navMeshAgent.SetDestination(player.transform.position);
         }
     }
