@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyFactory : MonoBehaviour
 {
     //Enemy prefabs
-    public Enemy berserker;
-    public Enemy lancer;
-    public Enemy marksman;
+    public GameObject berserker;
+    public GameObject lancer;
+    public GameObject marksman;
     public static EnemyFactory Instance = null;
 
     public void Awake()
@@ -26,15 +26,17 @@ public class EnemyFactory : MonoBehaviour
     {
         switch(enemy){
             case "berserker":
-                return Instantiate(berserker);
+                Instantiate(berserker);
+                return berserker.GetComponent<Enemy>();
             case "lancer":
-                return Instantiate(lancer);
+                Instantiate(lancer);
+                return lancer.GetComponent<Enemy>();
             case "marksman":
-                return Instantiate(marksman);
+                Instantiate(marksman);
+                return marksman.GetComponent<Enemy>();
             default:
                 Debug.Log("Returned a null enemy? Intentional?");
                 return null;
-
         }
     }
 }

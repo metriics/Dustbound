@@ -5,29 +5,41 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject player;
+    int enemyID = 0;
     List<Enemy> enemyList = new List<Enemy>();
 
-    public Enemy SendEnemy(string type = "null")
+    public Enemy SpawnEnemy(string type = "null")
     {
         return FindEnemy(type);
-    }
-
-    public void GetEnemy(Enemy enemy)
-    {
-        enemyList.Add(enemy);
     }
 
     private Enemy FindEnemy(string type)
     {
         foreach(Enemy enemy in enemyList){
-            if(enemy.name.ToLower() == type)
+            if(enemy.enemyName.ToLower() == type)
             {
                 return enemy;
             }
         }
 
         AddEnemy(type);
+        enemyList[enemyList.Count - 1].ID = enemyID;
+        enemyID++;
         return enemyList[enemyList.Count - 1];
+    }
+
+    private Enemy FindEnemy(int ID)
+    {
+        foreach (Enemy enemy in enemyList)
+        {
+            if (enemy.ID == ID)
+            {
+                return enemy;
+            }
+        }
+
+        Debug.Log("Enemy with ID " + ID + " does not exist");
+        return null;
     }
 
     private void AddEnemy(string type = "null")
@@ -48,7 +60,6 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-
         EnemyFactory.Instance.GenerateEnemy(type);
     }
 
