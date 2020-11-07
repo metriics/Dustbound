@@ -3,7 +3,13 @@ guid: a69009e9531e9444296973ba26b5c51c
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wagon
+    second: {fileID: -2105056849746099248, guid: 7463c98d924fe1143bb45c5f924ce622,
+      type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
