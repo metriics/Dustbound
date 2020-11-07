@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehaviour : BaseBehaviour
-{
-    public override void idle()
+//TODO: BaseBehaviour gone, fix/remove tihs class
+public class EnemyBehaviour : MonoBehaviour
+{ 
+    public void idle()
     {
-        base.idle();
     }
 
-    public override void attacking()
+    public void attacking()
     {
-        base.attacking();
     }
 
-    public override void moving(Vector3 pos)
+    public void moving(Vector3 pos)
     {
-        base.moving(pos);
     }
 }

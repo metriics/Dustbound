@@ -38,7 +38,7 @@ public class LancerBehaviour : BerserkerBehaviour
         }
     }
 
-    public override void blocking(Vector3 pos)
+    public void blocking(Vector3 pos)
     {
         speed = 2.0f;
         moving(pos);

@@ -9,11 +9,11 @@ public class BerserkerBehaviour : MonoBehaviour
     public GameObject player;
     public CharacterObj character;
     public float speed = 0.3f;
-    float reach = 2.0f;
+    public float reach = 2.0f;
     NavMeshAgent navMeshAgent;
-    public enum CharacterState { idle, attacking, moving }
+    public enum CharacterState { idle, attacking, moving, blocking }
 
-    float attackTime = 0.0f;
+    public float attackTime = 0.0f;
 
     // Start is called before the first frame update
     void Awake()
