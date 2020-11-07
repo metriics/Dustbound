@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-483262149513712275
+--- !u!114 &-4530737485152966083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,43 +31,17 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 1437040292377196511}
-<<<<<<< HEAD
-  - {fileID: -483262149513712275}
+  - {fileID: 3503907518659532722}
+  - {fileID: -4530737485152966083}
   EditorEvents: []
   EditorParameters: []
   MasterBanks:
-  - {fileID: -483262149513712275}
-=======
-  - {fileID: 560541594351491396}
-  EditorEvents: []
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: 560541594351491396}
->>>>>>> update+urp
+  - {fileID: -4530737485152966083}
   StringsBanks:
-  - {fileID: 1437040292377196511}
+  - {fileID: 3503907518659532722}
   stringsBankWriteTime: 637395793775194524
   cacheVersion: 3
---- !u!114 &560541594351491396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Fmod/DustboundAudio/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637395793775184534
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &1437040292377196511
+--- !u!114 &3503907518659532722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,75 +61,3 @@ MonoBehaviour:
   - Name: Desktop
     Value: 688
   Exists: 1
---- !u!114 &1796417719481088806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Fmod/DustboundAudio/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637394321017285274
-  LoadResult: 0
-  FileSizes: []
-  Exists: 0
---- !u!114 &2175174510403063736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Fmod/DustboundAudio/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637395003273679794
-  LoadResult: 0
-  FileSizes: []
-  Exists: 0
---- !u!114 &4094700262629287910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Fmod/DustboundAudio/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637403446645744611
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
---- !u!114 &7269680259797644924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: Assets/Sounds/Fmod/DustboundAudio/Build/Desktop/Master.bank
-  SubDir: 
-  lastModified: 637396870643772632
-  LoadResult: 0
-  FileSizes: []
-  Exists: 0

@@ -20,23 +20,30 @@ ScriptedImporter:
       identifier=\"$outputsize\" uid=\"2512936272\" type=\"8\" value=\"9,9\" />\n 
       <presetinput identifier=\"$randomseed\" uid=\"3266988802\" type=\"4\" value=\"9609\"
       />\n </sbspreset>\n"
-    shaderName: Universal Render Pipeline/Lit
+    shaderName: Standard
     materialProperties:
-      shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-      shaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP _OCCLUSIONMAP
+      shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+      shaderKeywords: _MAINTEX _METALLICGLOSSMAP _NORMALMAP _OCCLUSIONMAP _PARALLAXMAP
       lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
       customRenderQueue: -1
       texEnvs:
-      - name: _BaseMap
-        texture: {fileID: -494934249941564820, guid: 7463c98d924fe1143bb45c5f924ce622,
-          type: 3}
-        scale: {x: 1, y: 1}
-        offset: {x: 0, y: 0}
       - name: _BumpMap
         texture: {fileID: 7214357170526262471, guid: 7463c98d924fe1143bb45c5f924ce622,
           type: 3}
+        scale: {x: 1, y: 1}
+        offset: {x: 0, y: 0}
+      - name: _DetailAlbedoMap
+        texture: {instanceID: 0}
+        scale: {x: 1, y: 1}
+        offset: {x: 0, y: 0}
+      - name: _DetailMask
+        texture: {instanceID: 0}
+        scale: {x: 1, y: 1}
+        offset: {x: 0, y: 0}
+      - name: _DetailNormalMap
+        texture: {instanceID: 0}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _EmissionMap
@@ -57,62 +64,48 @@ ScriptedImporter:
           type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
-      - name: _SpecGlossMap
+      - name: _ParallaxMap
         texture: {instanceID: 0}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
-      - name: _AlphaClip
-        float: 0
-      - name: _Blend
-        float: 0
       - name: _BumpScale
         float: 1
-      - name: _Cull
-        float: 2
       - name: _Cutoff
         float: 0.5
+      - name: _DetailNormalMapScale
+        float: 1
       - name: _DstBlend
         float: 0
-      - name: _EnvironmentReflections
-        float: 1
       - name: _GlossMapScale
-        float: 0
+        float: 1
       - name: _Glossiness
-        float: 0
+        float: 0.5
       - name: _GlossyReflections
-        float: 0
+        float: 1
       - name: _Metallic
+        float: 0
+      - name: _Mode
         float: 0
       - name: _OcclusionStrength
         float: 1
-      - name: _QueueOffset
-        float: 0
-      - name: _ReceiveShadows
-        float: 1
-      - name: _Smoothness
-        float: 1
+      - name: _Parallax
+        float: 0.02
       - name: _SmoothnessTextureChannel
         float: 0
       - name: _SpecularHighlights
         float: 1
       - name: _SrcBlend
         float: 1
-      - name: _Surface
+      - name: _UVSec
         float: 0
-      - name: _WorkflowMode
-        float: 1
       - name: _ZWrite
         float: 1
       colors:
-      - name: _BaseColor
-        color: {r: 1, g: 1, b: 1, a: 1}
       - name: _Color
         color: {r: 1, g: 1, b: 1, a: 1}
       - name: _EmissionColor
         color: {r: 0, g: 0, b: 0, a: 1}
-      - name: _SpecColor
-        color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     outputDescList:
     - outputName: baseColor
       identifier: basecolor
@@ -238,7 +231,6 @@ ScriptedImporter:
     material: {fileID: -2105056849746099248, guid: 7463c98d924fe1143bb45c5f924ce622,
       type: 3}
     generatedTextures:
-    - {fileID: -494934249941564820, guid: 7463c98d924fe1143bb45c5f924ce622, type: 3}
     - {fileID: 7214357170526262471, guid: 7463c98d924fe1143bb45c5f924ce622, type: 3}
     - {fileID: 3478200495569326263, guid: 7463c98d924fe1143bb45c5f924ce622, type: 3}
     - {fileID: 5350266620031325996, guid: 7463c98d924fe1143bb45c5f924ce622, type: 3}
