@@ -17,6 +17,20 @@ public class QuestManager : MonoBehaviour
     public GameObject checkmark;
     public GameObject checkbox;
 
+    public static QuestManager current;
+
+    private void Awake()
+    {
+        if (current == null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     public Transform GetPlayer()
     {
         return player;

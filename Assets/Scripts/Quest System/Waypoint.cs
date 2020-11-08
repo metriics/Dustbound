@@ -17,7 +17,7 @@ public class Waypoint : MonoBehaviour
     {
         img = this.transform.GetComponent<Image>();
         distance = this.transform.GetComponentInChildren<TextMeshProUGUI>();
-        player = this.transform.GetComponentInParent<QuestManager>().GetPlayer();
+        player = QuestManager.current.GetPlayer();
         //this.transform.position = Camera.main.WorldToScreenPoint(worldPosition);
     }
 

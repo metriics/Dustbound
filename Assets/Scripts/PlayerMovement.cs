@@ -94,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            GameEvents.current.PlayerJump();
             Debug.Log("Jump");
         }
     }
@@ -123,8 +124,13 @@ public class PlayerMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0.0f, xRotation, 0.0f);
         followTarget.transform.localRotation = Quaternion.Euler(yRotation, 0.0f, 0.0f);
 
+        // get movement vector, only move if the vector has a value other than zero
         Vector3 curMoveVector = GetMoveVector();
-        controller.Move(curMoveVector);
+        if (curMoveVector != Vector3.zero)
+        {
+            controller.Move(curMoveVector);
+            GameEvents.current.PlayerMove();
+        }
 
         GroundCheck();
         if (isJumping && isGrounded)
