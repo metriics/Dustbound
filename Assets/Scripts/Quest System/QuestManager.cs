@@ -47,6 +47,10 @@ public class QuestManager : MonoBehaviour
                 questDesc.text = curQuest.questData.questDesc;
             }
 
+            //Add quest complete condition
+            //if(){
+            //Quests completed here}
+
             if (curQuest.completed)
             {
                 checkmark.SetActive(true);

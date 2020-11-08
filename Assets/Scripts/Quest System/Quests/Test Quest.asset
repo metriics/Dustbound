@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa7c37d5bf66654cb1dc490127b99ce, type: 3}
   m_Name: Test Quest
   m_EditorClassIdentifier: 
-  questName: Test Quest
+  questName: Jump
   questDesc: Testing the quest system
   reward: 0
   exp: 0
