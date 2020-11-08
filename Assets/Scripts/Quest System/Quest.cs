@@ -10,29 +10,44 @@ public class Quest : MonoBehaviour
     public Vector3 offset;
     public QuestData questData;
 
-    bool active = true;
+    public bool active = false;
+    public bool completed = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        waypoint = Instantiate(this.transform.GetComponentInParent<QuestManager>().waypointPrefab, this.transform.parent);
-        waypointData = waypoint.GetComponent<Waypoint>();
-        waypointData.worldPosition = worldPosition;
-        waypointData.offset = offset;
+        if (questData.hasWaypoint)
+        {
+            waypoint = Instantiate(this.transform.GetComponentInParent<QuestManager>().waypointPrefab, this.transform.parent);
+            waypointData = waypoint.GetComponent<Waypoint>();
+            waypointData.worldPosition = worldPosition;
+            waypointData.offset = offset;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (active == true)
+        if (questData.hasWaypoint)
         {
-            waypoint.SetActive(true);
-            //Quest Behaviour stuff
+            if (active == true)
+            {
+                waypoint.SetActive(true);
+                //Quest Behaviour stuff
 
+            }
+            else
+            {
+                waypoint.SetActive(false);
+            }
         }
-        else
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
         {
-            waypoint.SetActive(false);
+            completed = true;
         }
     }
 }

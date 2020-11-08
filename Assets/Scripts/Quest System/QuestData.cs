@@ -10,4 +10,5 @@ public class QuestData : ScriptableObject
     public int reward;
     public int exp;
     public int levelReq;
+    public bool hasWaypoint;
 }
