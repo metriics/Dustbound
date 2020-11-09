@@ -8,7 +8,7 @@ public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
 
-    public enum Type { onPlayerJump, onPlayerMove, onPlayerAttack };
+    public enum Type { onPlayerJump, onPlayerMove, onPlayerAttack, onPlayerLook, onPlayerHit, onEnemyKilled, onEnemyHit };
 
     private void Awake()
     {
@@ -28,6 +28,9 @@ public class GameEvents : MonoBehaviour
     public event Action onPlayerJump;
     public event Action onPlayerMove;
     public event Action onPlayerAttack;
+    public event Action onPlayerLook;
+
+    public event Action onPlayerHit;
 
     //// WAYPOINT EVENTS
     // This shouldn't be used unless you can pass data in these event calls. If not, you'd
@@ -36,7 +39,8 @@ public class GameEvents : MonoBehaviour
     //// PROGRESS EVENTS
     // These are events that could add to a progress bar, even if they are one time things.
     // For example, killing an enemy or picking up a specific powerup. 
-
+    public event Action onEnemyKilled;
+    public event Action onEnemyHit;
 
     public void PlayerJump()
     {
@@ -58,6 +62,38 @@ public class GameEvents : MonoBehaviour
         if (onPlayerAttack != null)
         {
             onPlayerAttack();
+        }
+    }
+
+    public void PlayerLook()
+    {
+        if (onPlayerLook != null)
+        {
+            onPlayerLook();
+        }
+    }
+
+    public void EnemyKilled()
+    {
+        if (onEnemyKilled != null)
+        {
+            onEnemyKilled();
+        }
+    }
+
+    public void EnemyHit()
+    {
+        if (onEnemyHit != null)
+        {
+            onEnemyHit();
+        }
+    }
+
+    public void PlayerHit()
+    {
+        if (onPlayerHit != null)
+        {
+            onPlayerHit();
         }
     }
 }

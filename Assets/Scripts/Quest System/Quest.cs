@@ -33,13 +33,13 @@ public class Quest : MonoBehaviour
             waypointData.offset = offset;
         }
 
-        if (questData.type == QuestType.Action)
-        {
-            // subscribe to events here
-            GameEvents.current.onPlayerJump += PlayerJumpEvent;
-            GameEvents.current.onPlayerMove += PlayerMoveEvent;
+        GameEvents.current.onPlayerJump += PlayerJumpEvent;
+        GameEvents.current.onPlayerMove += PlayerMoveEvent;
+        GameEvents.current.onPlayerAttack += PlayerAttackEvent;
+        GameEvents.current.onPlayerLook += PlayerLookEvent;
 
-        }
+        GameEvents.current.onEnemyKilled += EnemyKilledEvent;
+        GameEvents.current.onEnemyHit += EnemyHitEvent;
     }
 
     // Update is called once per frame
@@ -84,6 +84,47 @@ public class Quest : MonoBehaviour
         if (active && questData.subscribedTo == GameEvents.Type.onPlayerMove)
         {
             completed = true;
+        }
+    }
+
+    public void PlayerAttackEvent()
+    {
+        // check if current event is 
+        if (active && questData.subscribedTo == GameEvents.Type.onPlayerAttack)
+        {
+            completed = true;
+        }
+    }
+
+    public void PlayerLookEvent()
+    {
+        if (active && questData.subscribedTo == GameEvents.Type.onPlayerLook)
+        {
+            completed = true;
+        }
+    }
+
+    public void EnemyKilledEvent()
+    {
+        if (active && questData.subscribedTo == GameEvents.Type.onEnemyKilled)
+        {
+            questData.currentAmount += 1;
+            if (questData.currentAmount >= questData.amountNeeded)
+            {
+                completed = true;
+            }
+        }
+    }
+
+    public void EnemyHitEvent()
+    {
+        if (active && questData.subscribedTo == GameEvents.Type.onEnemyHit)
+        {
+            questData.currentAmount += 1;
+            if (questData.currentAmount >= questData.amountNeeded)
+            {
+                completed = true;
+            }
         }
     }
 }

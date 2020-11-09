@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 mouseVec;
     private float xRotation = 0.0f;
     private float yRotation = 0.0f;
+    private float prevYRot = 0.0f;
     private Vector2 moveVec;
     private Vector3 prevVec;
     private Vector3 movement;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private WeaponTrigger hitbox;
     private float attackTime = 0.0f;
     private bool isAttacking = false;
+    private bool attackEventCalled = false;
 
 
     private void Awake()
@@ -124,6 +126,14 @@ public class PlayerMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0.0f, xRotation, 0.0f);
         followTarget.transform.localRotation = Quaternion.Euler(yRotation, 0.0f, 0.0f);
 
+        if (yRotation != prevYRot)
+        {
+            GameEvents.current.PlayerLook();
+        }
+
+        prevYRot = yRotation;
+
+
         // get movement vector, only move if the vector has a value other than zero
         Vector3 curMoveVector = GetMoveVector();
         if (curMoveVector != Vector3.zero)
@@ -150,12 +160,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking)
         {
+            if (!attackEventCalled)
+            {
+                GameEvents.current.PlayerAttack();
+                attackEventCalled = true;
+            }
+
             attackTime += Time.deltaTime;
             if (attackTime >= 1.0f)
             {
                 hitbox.gameObject.SetActive(false);
                 attackTime = 0.0f;
                 isAttacking = false;
+                attackEventCalled = false;
             }
         }
 

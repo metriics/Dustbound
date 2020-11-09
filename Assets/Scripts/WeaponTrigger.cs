@@ -8,10 +8,12 @@ public class WeaponTrigger : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            GameEvents.current.PlayerHit();
             Debug.Log("Player was hit");
         }
         if (other.tag == "Enemy")
         {
+            GameEvents.current.EnemyHit();
             Debug.Log("Enemy was hit");
         }
     }

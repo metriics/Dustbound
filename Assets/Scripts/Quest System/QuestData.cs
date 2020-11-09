@@ -15,10 +15,11 @@ public class QuestData : ScriptableObject
     public int reward;
     public int exp;
     public int levelReq;
+    public bool showWaypoint;
 
     public GameEvents.Type subscribedTo;
-
-    public bool showWaypoint;
+    public int amountNeeded;
+    public int currentAmount = 0;
 }
 
 [CustomEditor(typeof(QuestData))]
@@ -44,12 +45,14 @@ public class QuestDataEditor : Editor
 
         else if (questData.type == QuestType.Location)
         {
-            //questData.showWaypoint = EditorGUILayout.Toggle("Show Waypoint", questData.showWaypoint);
+            
         }
 
         else if (questData.type == QuestType.Progress)
         {
             questData.subscribedTo = (GameEvents.Type)EditorGUILayout.EnumPopup("Progress type", questData.subscribedTo);
+            questData.amountNeeded = EditorGUILayout.IntField("Amount needed", questData.amountNeeded);
+            questData.currentAmount = EditorGUILayout.IntField("Current amount", questData.currentAmount);
         }
     }
 }
