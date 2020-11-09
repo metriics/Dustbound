@@ -7,6 +7,47 @@ public class EnemyManager : MonoBehaviour
     public GameObject player;
     int enemyID = 0;
     List<Enemy> enemyList = new List<Enemy>();
+    public EnemyFactory enemyFactory;
+    public static EnemyManager Instance;
+
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        AddEnemy("berserker");
+        FindEnemy(0).SetPos(new Vector3(109f, 1.5f, -3f));
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public GameObject GetPlayer() 
+    { 
+        Debug.Log(player.name); 
+        return player; 
+    }
+
+    public void SetPos(int ID, Vector3 pos) 
+    {
+        if(FindEnemy(ID) != null) 
+        {
+            FindEnemy(ID).pos = pos;
+        }
+    }
 
     public Enemy SpawnEnemy(string type = "null")
     {
@@ -16,16 +57,13 @@ public class EnemyManager : MonoBehaviour
     private Enemy FindEnemy(string type)
     {
         foreach(Enemy enemy in enemyList){
-            if(enemy.enemyName.ToLower() == type)
+            if(enemy.enemy.charName.ToLower() == type)
             {
                 return enemy;
             }
         }
-
-        AddEnemy(type);
-        enemyList[enemyList.Count - 1].ID = enemyID;
-        enemyID++;
-        return enemyList[enemyList.Count - 1];
+        Debug.Log("No enemy of type " + type);
+        return null;
     }
 
     private Enemy FindEnemy(int ID)
@@ -60,18 +98,8 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
         }
-        EnemyFactory.Instance.GenerateEnemy(type);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        enemyList.Add(EnemyFactory.Instance.GenerateEnemy(type));
+        enemyList[enemyList.Count - 1].ID = enemyID;
+        enemyID++;
     }
 }

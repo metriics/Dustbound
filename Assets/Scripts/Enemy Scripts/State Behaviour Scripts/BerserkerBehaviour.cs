@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class BerserkerBehaviour : MonoBehaviour
 {
-    public CharacterState state;
-    public GameObject player;
-    public CharacterObj character;
-    public float speed = 1f;
-    public float reach = 2.0f;
-    NavMeshAgent navMeshAgent;
-    public enum CharacterState { idle, attacking, blocking, moving }
+    public enum CharacterState { idle, attacking, blocking, moving } //Enemy State Enum
 
-    public float attackTime = 0.0f;
+    public float speed = 5.0f; //Base speed for enemy
+    public float reach = 2.0f; //Attack Range for enemy
+    protected Enemy enemy; //Stats from enemy class
+    protected CharacterState state = CharacterState.idle;
+    protected GameObject player;
+    protected NavMeshAgent navMeshAgent;
+    protected float attackTime = 0.0f;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,8 +22,14 @@ public class BerserkerBehaviour : MonoBehaviour
         navMeshAgent.Warp(this.transform.position);
     }
 
+    void Start()
+    {
+        player = this.transform.GetComponentInParent<EnemyManager>().player;// EnemyManager.Instance.GetPlayer();
+        enemy = this.transform.GetComponent<Enemy>();
+    }
+
     // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
         if(state == CharacterState.idle)
         {
@@ -32,10 +38,6 @@ public class BerserkerBehaviour : MonoBehaviour
         else if(state == CharacterState.attacking)
         {
             attacking();
-        }
-        else if(state == CharacterState.blocking)
-        {
-            blocking(player.transform.position);
         }
         else if(state == CharacterState.moving)
         {
@@ -46,7 +48,6 @@ public class BerserkerBehaviour : MonoBehaviour
     virtual public void idle()
     {
         //Behaviour for idle position
-        //Debug.Log(character.charName + " is idle");
         navMeshAgent.speed = 0.0f;
         navMeshAgent.SetDestination(this.transform.position);
         if (Vector3.Distance(this.transform.position, player.transform.position) < 20.0f)
@@ -58,46 +59,47 @@ public class BerserkerBehaviour : MonoBehaviour
     virtual public void attacking()
     {
         //Behaviour for attacking position
-        //Debug.Log(character.charName + " is attacking");
         var weaponHitbox = this.transform.Find("Weapon Hitbox");
-        if (weaponHitbox.gameObject.activeSelf == false)
+        attackTime += Time.deltaTime;
+        if(attackTime >= 4.0f)
         {
-            Vector3 dir = player.transform.position - this.transform.position;
-            Quaternion rot = Quaternion.LookRotation(dir);
-            transform.rotation = rot;
-            weaponHitbox.gameObject.SetActive(true);
+            //Done attack
+            weaponHitbox.gameObject.SetActive(false);
+            state = CharacterState.moving;
             attackTime = 0.0f;
         }
-        else
+        else if (attackTime >= 2.0f)
         {
-            attackTime += Time.deltaTime;
-            if(attackTime >= 2.0f)
-            {
-                weaponHitbox.gameObject.SetActive(false);
-                state = CharacterState.moving;
-            }
+            //Start Attacking
+            weaponHitbox.gameObject.SetActive(true);
         }
-    }
-
-    virtual public void blocking(Vector3 pos)
-    {
-
+        else if (weaponHitbox.gameObject.activeSelf == false)
+        {
+            //Preping attack
+            Vector3 dir = player.transform.position - this.transform.position;
+            Quaternion rot = Quaternion.LookRotation(dir);
+            rot.x = 0.0f;
+            rot.z = 0.0f;
+            transform.rotation = rot;
+        }
     }
 
     virtual public void moving(Vector3 pos)
     {
         //Behaviour for moving position
-        //Debug.Log(character.charName + " is moving");
         if(Vector3.Distance(this.transform.position, player.transform.position) < reach)
         {
+            //If player is within reach start attacking
             state = CharacterState.attacking;
         }
         else if(Vector3.Distance(this.transform.position, player.transform.position) > 20.0f)
         {
+            //If player is out of sight/distance go idle
             state = CharacterState.idle;
         }
         else
         {
+            //Move towards player
             navMeshAgent.speed = speed;
             navMeshAgent.SetDestination(player.transform.position);
         }

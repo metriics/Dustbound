@@ -10,7 +10,7 @@ public class CharacterObj : ScriptableObject
     public string charDesc;
     public int baseHealth;
     public int baseDmg;
-    public int baseArmour;
+    public int baseDef;
 
     public enum Who { player, enemy, npc }
 }

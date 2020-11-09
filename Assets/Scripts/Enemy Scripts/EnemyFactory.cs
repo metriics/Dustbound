@@ -1,39 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyFactory : MonoBehaviour
 {
     //Enemy prefabs
-    public GameObject berserker;
+    public GameObject berserker = null;
     public GameObject lancer;
     public GameObject marksman;
-    public static EnemyFactory Instance = null;
+    public static EnemyFactory Instance;
 
     public void Awake()
     {
         if (Instance == null)
         {
-            Instance = new EnemyFactory();
+            Instance = this;
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
     }
 
     public Enemy GenerateEnemy(string enemy = null)
     {
-        switch(enemy){
+        GameObject temp = null;
+        switch (enemy) {
             case "berserker":
-                Instantiate(berserker);
-                return berserker.GetComponent<Enemy>();
+                temp = Instantiate(berserker, EnemyManager.Instance.gameObject.transform);
+                return temp.GetComponent<Enemy>();
             case "lancer":
-                Instantiate(lancer);
-                return lancer.GetComponent<Enemy>();
+                temp = Instantiate(lancer, EnemyManager.Instance.gameObject.transform);
+                return temp.GetComponent<Enemy>();
             case "marksman":
-                Instantiate(marksman);
-                return marksman.GetComponent<Enemy>();
+                temp = Instantiate(marksman, EnemyManager.Instance.gameObject.transform);
+                return temp.GetComponent<Enemy>();
             default:
                 Debug.Log("Returned a null enemy? Intentional?");
                 return null;

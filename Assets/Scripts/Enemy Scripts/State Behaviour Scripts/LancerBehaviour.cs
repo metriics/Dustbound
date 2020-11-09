@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//TODO Change this to not rely on Berserker Behaviour for functions like attack, block, move (can inherit variables and some function)
 public class LancerBehaviour : BerserkerBehaviour
 {
     public float blockRadius = 10.0f;
     public float blockTimer = 0.0f;
     public bool hit = false;
+
+    protected override void Update()
+    {
+        base.Update();
+        if (state == CharacterState.blocking)
+        {
+            blocking(player.transform.position);
+        }
+    }
 
     public override void idle()
     {
@@ -38,7 +48,7 @@ public class LancerBehaviour : BerserkerBehaviour
         }
     }
 
-    public override void blocking(Vector3 pos)
+    public void blocking(Vector3 pos)
     {
         speed = 2.0f;
         moving(pos);
@@ -66,7 +76,14 @@ public class LancerBehaviour : BerserkerBehaviour
         base.moving(pos);
         if(Vector3.Distance(this.transform.position, player.transform.position) < blockRadius)
         {
+            //Block if player is in block radius
             state = CharacterState.blocking;
+        }
+        else
+        {
+            //Move if player isnt in block radius
+            state = CharacterState.moving;
+            speed = 5.0f;
         }
     }
 }
