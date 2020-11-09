@@ -52,7 +52,7 @@ public class QuestDataEditor : Editor
         {
             questData.subscribedTo = (GameEvents.Type)EditorGUILayout.EnumPopup("Progress type", questData.subscribedTo);
             questData.amountNeeded = EditorGUILayout.IntField("Amount needed", questData.amountNeeded);
-            questData.currentAmount = EditorGUILayout.IntField("Current amount", questData.currentAmount);
+            //questData.currentAmount = EditorGUILayout.IntField("Current amount", questData.currentAmount);
         }
     }
 }

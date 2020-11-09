@@ -7,7 +7,7 @@ using TMPro;
 public class Waypoint : MonoBehaviour
 {
     Image img;
-    TextMeshProUGUI distance;
+    //TextMeshProUGUI distance;
     public Transform player;
     public Vector3 worldPosition;
     public Vector3 offset;
@@ -16,7 +16,7 @@ public class Waypoint : MonoBehaviour
     void Start()
     {
         img = this.transform.GetComponent<Image>();
-        distance = this.transform.GetComponentInChildren<TextMeshProUGUI>();
+        //distance = this.transform.GetComponentInChildren<TextMeshProUGUI>();
         player = QuestManager.current.GetPlayer();
         //this.transform.position = Camera.main.WorldToScreenPoint(worldPosition);
     }
@@ -50,6 +50,6 @@ public class Waypoint : MonoBehaviour
         //pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
         img.transform.position = pos;
-        distance.text = ((int)Vector3.Distance(worldPosition, player.position)).ToString() + "m";
+        //distance.text = ((int)Vector3.Distance(worldPosition, player.position)).ToString() + "m";
     }
 }

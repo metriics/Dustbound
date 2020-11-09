@@ -59,7 +59,7 @@ public class QuestManager : MonoBehaviour
             {
                 checkmark.SetActive(true);
                 completedTimer += Time.deltaTime;
-                if (completedTimer >= 5.0f)
+                if (completedTimer >= 1.0f)
                 {
                     questsCompleted++;
                     curQuest.active = false;
