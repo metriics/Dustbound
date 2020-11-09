@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using JetBrains.Annotations;
 
-public enum QuestType { Waypoint, Action, Progress};
+public enum QuestType { Location, Action, Progress};
 
 [CreateAssetMenu]
 public class QuestData : ScriptableObject
@@ -35,15 +35,16 @@ public class QuestDataEditor : Editor
         questData.reward = EditorGUILayout.IntField("Reward", questData.reward);
         questData.exp = EditorGUILayout.IntField("Experience", questData.exp);
         questData.levelReq = EditorGUILayout.IntField("Level Requirement", questData.levelReq);
+        questData.showWaypoint = EditorGUILayout.Toggle("Show Waypoint", questData.showWaypoint);
 
         if (questData.type == QuestType.Action) // if the type is action, show event subscription list
         {
             questData.subscribedTo = (GameEvents.Type)EditorGUILayout.EnumPopup("Action type", questData.subscribedTo);
         }
 
-        else if (questData.type == QuestType.Waypoint)
+        else if (questData.type == QuestType.Location)
         {
-            questData.showWaypoint = EditorGUILayout.Toggle("Show Waypoint", questData.showWaypoint);
+            //questData.showWaypoint = EditorGUILayout.Toggle("Show Waypoint", questData.showWaypoint);
         }
 
         else if (questData.type == QuestType.Progress)

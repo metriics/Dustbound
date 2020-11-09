@@ -47,6 +47,8 @@ public class BerserkerBehaviour : MonoBehaviour
     {
         //Behaviour for idle position
         //Debug.Log(character.charName + " is idle");
+        navMeshAgent.speed = 0.0f;
+        navMeshAgent.SetDestination(this.transform.position);
         if (Vector3.Distance(this.transform.position, player.transform.position) < 20.0f)
         {
             state = CharacterState.moving;

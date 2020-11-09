@@ -25,7 +25,7 @@ public class Quest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (questData.type == QuestType.Waypoint)
+        if (questData.showWaypoint)
         {
             waypoint = Instantiate(QuestManager.current.waypointPrefab, this.transform);
             waypointData = waypoint.GetComponent<Waypoint>();
@@ -33,7 +33,7 @@ public class Quest : MonoBehaviour
             waypointData.offset = offset;
         }
 
-        else if (questData.type == QuestType.Action)
+        if (questData.type == QuestType.Action)
         {
             // subscribe to events here
             GameEvents.current.onPlayerJump += PlayerJumpEvent;
@@ -45,14 +45,11 @@ public class Quest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (questData.type == QuestType.Waypoint)
+        if (questData.showWaypoint)
         {
             if (active == true)
             {
-                if (questData.showWaypoint)
-                {
-                    waypoint.SetActive(true);
-                }
+                waypoint.SetActive(true);
                 
                 //Quest Behaviour stuff
 
@@ -74,12 +71,19 @@ public class Quest : MonoBehaviour
 
     public void PlayerJumpEvent()
     {
-        // check if current event is 
-        completed = true;
+        // check if current event is
+        if (active && questData.subscribedTo == GameEvents.Type.onPlayerJump)
+        {
+            completed = true;
+        }
     }
 
     public void PlayerMoveEvent()
     {
         // check if current event is 
+        if (active && questData.subscribedTo == GameEvents.Type.onPlayerMove)
+        {
+            completed = true;
+        }
     }
 }

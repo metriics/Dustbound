@@ -54,18 +54,8 @@ public class QuestManager : MonoBehaviour
         if (curQuest != null)
         {
             checkbox.SetActive(true);
-            if (!curQuest.active)
-            {
-                curQuest.active = true;
-                questText.text = curQuest.questData.questName;
-                questDesc.text = curQuest.questData.questDesc;
-            }
 
-            //Add quest complete condition
-            //if(){
-            //Quests completed here}
-
-            if (curQuest.completed)
+            if (curQuest.completed && curQuest.active)
             {
                 checkmark.SetActive(true);
                 completedTimer += Time.deltaTime;
@@ -87,6 +77,12 @@ public class QuestManager : MonoBehaviour
                         curQuest = null;
                     }
                 }
+            }
+            else if (!curQuest.active)
+            {
+                curQuest.active = true;
+                questText.text = curQuest.questData.questName;
+                questDesc.text = curQuest.questData.questDesc;
             }
         }
 
