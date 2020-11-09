@@ -1,0 +1,14 @@
+﻿  LevelManager.cpp
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.h(29,41): warning C4251: 'LevelManager::m_objectList': class 'std::vector<RawGameObject,std::allocator<RawGameObject>>' needs to have dll-interface to be used by clients of class 'LevelManager'
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.h(29): message : see declaration of 'std::vector<RawGameObject,std::allocator<RawGameObject>>'
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(25,31): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(78,53): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(100,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(101,47): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
+          with
+          [
+              _Elem=char
+          ]
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(101,28): warning C4309: 'argument': truncation of constant value
+C:\Users\steph\Desktop\LevelManagerPlugin\LevelManagerPlugin\LevelManager.cpp(101,48): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  LevelManagerPlugin.vcxproj -> C:\Users\steph\Desktop\LevelManagerPlugin\x64\Debug\LevelManagerPlugin.exe
