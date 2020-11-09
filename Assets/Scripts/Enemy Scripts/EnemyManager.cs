@@ -25,8 +25,13 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int i = 0; i < this.gameObject.transform.childCount; i++)
+        {
+            this.gameObject.transform.GetChild(i).GetComponent<Enemy>().ID = enemyID;
+            enemyID++;
+        }
         AddEnemy("berserker");
-        FindEnemy(0).SetPos(new Vector3(109f, 1.5f, -3f));
+        FindEnemy(enemyList[enemyList.Count - 1].ID).SetPos(new Vector3(109f, 1.5f, -3f));
     }
 
     // Update is called once per frame
