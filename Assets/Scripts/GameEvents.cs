@@ -8,7 +8,7 @@ public class GameEvents : MonoBehaviour
 {
     public static GameEvents current;
 
-    public enum Type { onPlayerJump, onPlayerMove, onPlayerAttack, onPlayerLook, onPlayerHit, onEnemyKilled, onEnemyHit };
+    public enum Type { None, onPlayerJump, onPlayerMove, onPlayerAttack, onPlayerLook, onPlayerHit, onEnemyKilled, onEnemyHit };
 
     private void Awake()
     {

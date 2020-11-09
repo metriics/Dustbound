@@ -15,6 +15,8 @@ public class WeaponTrigger : MonoBehaviour
         {
             GameEvents.current.EnemyHit();
             Debug.Log("Enemy was hit");
+            Debug.Log(other.gameObject.GetComponent<Enemy>().health);
+            other.gameObject.GetComponent<Enemy>().health--;
         }
     }
 }
