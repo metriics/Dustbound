@@ -1,3 +1,5 @@
+_Archived: we have moved to a private repo_
+
 # Dustbound
 Twin Crow's year 3 game, Dustbound!
 
